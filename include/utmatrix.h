@@ -88,7 +88,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	return pVector[pos];
+	return pVector[pos-StartIndex];
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сравнение
@@ -224,13 +224,27 @@ TMatrix<ValType>::TMatrix(const TVector<TVector<ValType> > &mt):
   TVector<TVector<ValType> >(mt) {}
 
 template <class ValType> // сравнение
-bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
+bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const //???
 {
+	if (Size != mt.Size)
+		return false;
+	for (int i = 0; i < Size; i++)
+		for (int j = i; j < Size; j++)
+			if (pVector[i][j] != mt.pVector[i][j])
+				return false;
+	return true;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // сравнение
-bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
+bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const //???
 {
+	if (Size != mt.Size)
+		return true;
+	for (int i = 0; i < Size; i++)
+		for (int j = i; j < Size; j++)
+			if (pVector[i][j] != mt.pVector[i][j])
+				return true;
+	return false;
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // присваивание
