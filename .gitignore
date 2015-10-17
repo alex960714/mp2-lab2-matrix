@@ -6,9 +6,9 @@
 *.dep
 *.res
 *.resources
+*.suo
 *.sdf
 *.open*
-*.suo
 
 # Precompiled Headers
 *.gch
