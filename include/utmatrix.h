@@ -88,6 +88,8 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
+	if ((pos - StartIndex < 0)||(pos-StartIndex >= Size))
+		throw pos;
 	return pVector[pos-StartIndex];
 } /*-------------------------------------------------------------------------*/
 
@@ -159,7 +161,7 @@ template <class ValType> // сложение
 TVector<ValType> TVector<ValType>::operator+(const TVector<ValType> &v)
 {
 	if (Size != v.Size)
-		throw;
+		throw "Not equal sizes";
 	TVector<ValType> _v(Size);
 	for (int i = 0; i < Size; i++)
 		_v.pVector[i] = pVector[i] + v.pVector[i];
@@ -170,10 +172,10 @@ template <class ValType> // вычитание
 TVector<ValType> TVector<ValType>::operator-(const TVector<ValType> &v)
 {
 	if (Size != v.Size)
-		throw;
-	TVector<ValType> _v(size);
+		throw "Not equal sizes";
+	TVector<ValType> _v(Size);
 	for (int i = 0; i < Size; i++)
-		_v.pVector[i] = p.Vector[i] - v.pVector[i];
+		_v.pVector[i] = pVector[i] - v.pVector[i];
 	return _v;
 } /*-------------------------------------------------------------------------*/
 
@@ -181,7 +183,7 @@ template <class ValType> // скалярное произведение
 ValType TVector<ValType>::operator*(const TVector<ValType> &v)
 {
 	if (Size != v.Size)
-		throw;
+		throw "Not equal sizes";
 	ValType sp=0;
 	for (int i = 0; i < Size; i++)
 		sp = sp + pVector[i] * v.pVector[i];
