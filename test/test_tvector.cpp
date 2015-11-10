@@ -40,10 +40,11 @@ TEST(TVector, copied_vector_is_equal_to_source_one)
 TEST(TVector, copied_vector_has_its_own_memory) //???
 {
   TVector<int> v(10);
+  v[0]=1;
   TVector<int> v1(v);
+  v1[0]=2;
 
-  //ASSERT_NO_FATAL_FAILURE(v1.GetSize()); //???
-  EXPECT_EQ(v.GetSize(), v1.GetSize());  //???
+  EXPECT_NE(&v[0],&v1[0]);
 }
 
 TEST(TVector, can_get_size)
@@ -89,7 +90,7 @@ TEST(TVector, can_assign_vector_to_itself) //???
 	v[6] = 6;
 	v = v;
 
-	//ASSERT_NO_THROW(v = v); //???
+	ASSERT_NO_THROW(v = v); //???
 	EXPECT_NE(0, v[3]);
     EXPECT_NE(0, v[6]);
 }

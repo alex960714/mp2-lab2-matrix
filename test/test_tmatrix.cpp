@@ -37,8 +37,7 @@ TEST(TMatrix, copied_matrix_has_its_own_memory) //???
 	TMatrix<int> m(5);
 	TMatrix<int> m1(m);
 
-	//ASSERT_NO_FATAL_FAILURE(m1.GetSize());
-	EXPECT_EQ(m.GetSize(), m1.GetSize());
+	EXPECT_NE(&m[0],&m1[0]);
 }
 
 TEST(TMatrix, can_get_size) 
@@ -80,7 +79,7 @@ TEST(TMatrix, can_assign_matrix_to_itself)
 	m[3][3] = 1;
 	m = m;
 
-	//ASSERT_NO_THROW(m = m);
+	ASSERT_NO_THROW(m = m);
 	EXPECT_NE(0, m[0][2]);
 	EXPECT_NE(0, m[3][3]);
 }
